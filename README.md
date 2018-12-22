@@ -28,7 +28,7 @@ The CollaborativeSelectionManager class allows the consumer to render remote cur
 const textarea = document.getElementById("example");
 const selectionManager = new HtmlTextCollabExt.CollaborativeSelectionManager(textarea);
 
-const collaborator = selectionManager.createCollaborator("test"", "Test User", color, end, {anchor: 10, target: 20});
+const collaborator = selectionManager.createCollaborator("test", "Test User", "red", {anchor: 10, target: 20});
 
 collaborator.setSelection({anchor: 5, target: 10});
 
