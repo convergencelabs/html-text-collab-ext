@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "es6",
+    "noImplicitAny": true,
+    "target": "es5",
+    "lib": ["es5", "es6", "dom"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

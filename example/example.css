@@ -1,0 +1,62 @@
+textarea {
+  height: 300px;
+  width: 100%;
+  line-height: 1.2;
+  float: left;
+  margin-right: 20px;
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
+input:not([type=number]) {
+  margin-right: 20px;
+}
+
+input[type=range] {
+  flex: 1;
+}
+
+label {
+  margin-right: 10px;
+}
+
+body {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+div.main {
+  width: 800px;
+  margin: auto;
+}
+
+div.description {
+  background: #EEEEEE;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+  font-size: 12px;
+  padding: 4px;
+}
+
+div.header {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
+div.controls {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}

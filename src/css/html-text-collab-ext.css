@@ -1,0 +1,33 @@
+div.text-collab-ext {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+div.text-collab-ext div.text-collab-ext-scroller {
+  position: absolute;
+  width: 100%;
+}
+
+div.text-collab-ext div.collaborator-cursor {
+  position: absolute;
+  width: 2px;
+  opacity: 0.8;
+}
+
+div.text-collab-ext div.collaborator-cursor-tooltip {
+  position: absolute;
+  white-space: nowrap;
+  color: #FFFFFF;
+  text-shadow: 0 0 1px #000000;
+  opacity: 1.0;
+  font-size: 12px;
+  padding: 2px;
+  font-family: sans-serif;
+
+  transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -ms-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+}
