@@ -1,8 +1,10 @@
 textarea {
   height: 300px;
-  width: 100%;
+  flex: 1;
   line-height: 1.2;
-  float: left;
+}
+
+textarea:first-child {
   margin-right: 20px;
 }
 
@@ -43,6 +45,10 @@ div.description {
 div.header {
   border-bottom: 1px solid black;
   margin-bottom: 10px;
+}
+
+div.content {
+  display: flex;
 }
 
 div.controls {

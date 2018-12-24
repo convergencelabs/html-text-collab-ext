@@ -7,7 +7,8 @@
   "typings": "typings/index.ts",
   "scripts": {
     "dist": "gulp dist",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "start": "lite-server"
   },
   "keywords": [
     "collaboration",
@@ -44,6 +45,7 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-typescript": "7.1.0",
     "@babel/register": "7.0.0",
+    "@convergence/convergence": "^1.0.0-beta.4",
     "@convergence/string-change-detector": "0.1.8",
     "del": "3.0.0",
     "fs": "0.0.1-security",
@@ -59,6 +61,7 @@
     "gulp-uglify": "3.0.1",
     "import": "0.0.6",
     "jquery": "3.3.1",
+    "lite-server": "2.4.0",
     "rollup": "0.68.1",
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-node-resolve": "4.0.0",

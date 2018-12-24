@@ -52,7 +52,7 @@ export class TextInputManager {
     this._setTextSelection(xStart, xEnd);
   }
 
-  deleteText(index: number, length: number) {
+  deleteText(index: number, length: number): void {
     this._assertBound();
     const {start, end} = this._getSelection();
     const xStart = TextInputManager._transformIndexOnDelete(start, index, length);
@@ -62,11 +62,15 @@ export class TextInputManager {
     this._setTextSelection(xStart, xEnd);
   }
 
-  setText(value: string) {
+  setText(value: string): void {
     this._assertBound();
     this._changeDetector.setValue(value);
     this._updateControl();
     this._setTextSelection(0, 0);
+  }
+
+  getText(): string {
+    return this._control.value;
   }
 
   private _updateControl(): void {
@@ -88,7 +92,7 @@ export class TextInputManager {
   }
 
   private _setTextSelection(start: number, end: number): void {
-    this._control.focus();
+    // this._control.focus();
     this._control.setSelectionRange(start, end);
   }
 

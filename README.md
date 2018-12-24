@@ -1,7 +1,7 @@
 ## HTML Text Collaborative Extensions
 [![Build Status](https://travis-ci.org/convergencelabs/html-text-collab-ext.svg?branch=master)](https://travis-ci.org/convergencelabs/html-text-collab-ext)
 
-A set of utilities that enables real time collaboration within normal HTML Text Elements.
+A set of utilities that enhances a normal HTML `<textarea>` element with collaborative editing capabilities. The enhanced `<textarea>` is able to render the cursor and selection of other collaborators. A tooltip with the collaborator's username can be flashed when remote edits are made. The utility also allows for non-disruptive modification of the `<textarea>` where the local user's selection and cursor are not impacted by changes to the `<textarea>`contents.
 
 ## Installation
 
@@ -9,48 +9,52 @@ Install package with NPM and add it to your development dependencies:
 
 ```npm install --save-dev @convergence/html-text-collab-ext```
 
-## Usage
+## Example Usage
 
 ### HTML
 ```html
 <html>
   <body>
-    <textarea id="example"></textarea>
+    <textarea id="example">
+    Some example text to edit.
+    </textarea>
   </body>
 </html>
 ```
 
-### CollaborativeSelectionManager
-The CollaborativeSelectionManager class allows the consumer to render remote cursors and selections within a text control.
-
-
+### JavaScript
 ```javascript
 const textarea = document.getElementById("example");
-const selectionManager = new HtmlTextCollabExt.CollaborativeSelectionManager(textarea);
+const textEditor = new HtmlTextCollabExt.CollaborativeTextEditor({
+  control: textarea,
+  onInsert: (index, value) => console.log(`"${value}" was inserted at index ${index}`,
+  onDelete: (index, length) => console.log(`"${length}" characters were deleted at index ${index}`,
+  onSelectionChanged: (selection) => console.log(`selection was changed to ${JSON.stringify(selection)}`)
+}
 
-const collaborator = selectionManager.createCollaborator("test", "Test User", "red", {anchor: 10, target: 20});
+//
+// Selection Management
+//
+const selectionManager = textEditor.selectionManager();
 
+const collaborator = selectionManager.createCollaborator(
+  "test", "Test User", "red", {anchor: 10, target: 20});
 collaborator.setSelection({anchor: 5, target: 10});
-
 collaborator.flashCursorToolTip(2);
 
 selectionManager.removeCollaborator("test");
+
+//
+// Text Modification
+//
+
+// Insert text at index 10
+textEditor.insertText(10, "Inserted Text");
+
+// Delete 5 charachters at index 10
+textEditor.deleteText(10, 5);
+
+// Set the entire value.
+textEditor.setText("New textarea value");
 ```
 
-### TextInputManager
-A utility to help to get granular text editing events and to inject remote events without disrupting local operations.
-
-```javascript
-const textarea = document.getElementById("example");
-const inputManager = new HtmlTextCollabExt.TextInputManager({
-  constrol: textarea,
-  onInsert: (index, value) => console.log("Text Inserted: ", index, value);
-  onDelete: (index, length) => console.log("Text Deleted: ", index, value);
-});
-
-inputManager.insertText(4, "test");
-
-inputManager.deleteText(4, 5);
-
-inputManager.setText("new text");
-```

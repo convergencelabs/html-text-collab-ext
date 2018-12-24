@@ -1,0 +1,10 @@
+{
+  "ghostMode": false,
+  "server": {
+    "baseDir": "example",
+    "routes": {
+      "/libs": "node_modules",
+      "/dist": "dist"
+    }
+  }
+}

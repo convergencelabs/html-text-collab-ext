@@ -1,42 +1,61 @@
 import {ISelectionRange} from "./ISelectionRange";
 import {CollaboratorSelection} from "./CollaboratorSelection";
 
+export type ISelectionCallback = (selection: ISelectionRange) => void;
+
+export interface ICollaborativeSelectionManagerOptions {
+  control: HTMLTextAreaElement;
+  onSelectionChanged: ISelectionCallback;
+}
+
 export class CollaborativeSelectionManager {
   private readonly _collaborators: Map<string, CollaboratorSelection>;
   private readonly _textElement: HTMLTextAreaElement;
   private readonly _overlayContainer: HTMLDivElement;
   private readonly _scroller: HTMLDivElement;
+  private readonly _onSelection: ISelectionCallback;
+  private _selectionAnchor: number;
+  private _selectionTarget: number;
 
-  constructor(textElement: HTMLTextAreaElement) {
+  constructor(options: ICollaborativeSelectionManagerOptions) {
     this._collaborators = new Map();
-    this._textElement = textElement;
+    this._textElement = options.control;
+    this._onSelection = options.onSelectionChanged;
 
-    this._overlayContainer = textElement.ownerDocument.createElement("div");
+    this._selectionAnchor = this._textElement.selectionStart;
+    this._selectionTarget = this._textElement.selectionEnd;
+
+    this._overlayContainer = this._textElement.ownerDocument.createElement("div");
     this._overlayContainer.className = "text-collab-ext";
-    textElement.parentElement.append(this._overlayContainer);
+    this._textElement.parentElement.append(this._overlayContainer);
 
-    this._scroller = textElement.ownerDocument.createElement("div");
+    this._scroller = this._textElement.ownerDocument.createElement("div");
     this._scroller.className = "text-collab-ext-scroller";
     this._overlayContainer.append(this._scroller);
 
     // Provide resize handling. After the mose down, we register for mouse
     // movement and check if we have resized. We then listen for a mouse up
     // to unregister.
-    textElement.addEventListener("mousedown", e => {
-      window.addEventListener("mousemove", this._checkResize);
+    this._textElement.addEventListener("mousedown", () => {
+      window.addEventListener("mousemove", this._onMouseMove);
     });
 
-    window.addEventListener("mouseup", e => {
-      window.removeEventListener("mousemove", this._checkResize);
+    window.addEventListener("mouseup", () => {
+      window.removeEventListener("mousemove", this._onMouseMove);
       this._checkResize();
     });
 
-    textElement.addEventListener("scroll", (e) => this._updateScroller());
+    this._textElement.addEventListener("scroll", () => this._updateScroller());
+
+    this._textElement.addEventListener("keydown", this._checkSelection);
+    this._textElement.addEventListener("click", this._checkSelection);
+    this._textElement.addEventListener("focus", this._checkSelection);
+    this._textElement.addEventListener("blur", this._checkSelection);
 
     this._updateOverlay();
   }
 
-  public createCollaborator(id: string, label: string, color: string, selection?: ISelectionRange): CollaboratorSelection {
+  public addCollaborator(id: string, label: string, color: string, selection?: ISelectionRange): CollaboratorSelection {
     if (this._collaborators.has(id)) {
       throw new Error(`A collaborator with the specified id already exists: ${id}`);
     }
@@ -57,9 +76,19 @@ export class CollaborativeSelectionManager {
 
   public removeCollaborator(id: string): void {
     const renderer = this._collaborators.get(id);
-    renderer.clearSelection();
+    if (renderer !== undefined) {
+      renderer.clearSelection();
+      this._collaborators.delete(id);
+    } else {
+      throw new Error(`Unknown collaborator: ${id}`);
+    }
+  }
 
-    this._collaborators.delete(id);
+  public getSelection(): ISelectionRange {
+    return {
+      anchor: this._selectionAnchor,
+      target: this._selectionTarget
+    };
   }
 
   public show(): void {
@@ -72,6 +101,32 @@ export class CollaborativeSelectionManager {
 
   public dispose(): void {
     this._overlayContainer.parentElement.removeChild(this._overlayContainer);
+  }
+
+  private _checkSelection = () => {
+    setTimeout(() => {
+      const changed = this._textElement.selectionStart !== this._selectionAnchor ||
+        this._textElement.selectionEnd !== this._selectionTarget;
+      if (changed) {
+        if (this._selectionAnchor === this._textElement.selectionStart) {
+          this._selectionAnchor = this._textElement.selectionStart;
+          this._selectionTarget = this._textElement.selectionEnd;
+        } else {
+          this._selectionAnchor = this._textElement.selectionEnd;
+          this._selectionTarget = this._textElement.selectionStart;
+        }
+
+        this._onSelection({
+          anchor: this._selectionAnchor,
+          target: this._selectionTarget
+        });
+      }
+    }, 0);
+  }
+
+  private _onMouseMove = () => {
+    this._checkResize();
+    this._checkSelection();
   }
 
   private _checkResize = () => {
