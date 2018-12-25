@@ -1,18 +1,11 @@
 {
   "name": "@convergence/html-text-collab-ext",
   "version": "0.1.0",
-  "description": "Collaborative extension for HTML text inputs",
-  "main": "lib/index.js",
-  "module": "es6/index.js",
-  "typings": "typings/index.ts",
-  "scripts": {
-    "dist": "gulp dist",
-    "clean": "gulp clean",
-    "start": "lite-server"
-  },
+  "description": "Collaborative extension for HTML textareas",
   "keywords": [
     "collaboration",
-    "text",
+    "textarea",
+    "editor",
     "html"
   ],
   "homepage": "http://convergencelabs.com",
@@ -29,6 +22,14 @@
   "bugs": {
     "url": "https://github.com/convergencelabs/html-text-collab-ext/issues"
   },
+  "scripts": {
+    "dist": "gulp dist",
+    "clean": "gulp clean",
+    "start": "lite-server"
+  },
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "typings/index.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -45,7 +46,7 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-typescript": "7.1.0",
     "@babel/register": "7.0.0",
-    "@convergence/convergence": "^1.0.0-beta.4",
+    "@convergence/convergence": "1.0.0-beta.4",
     "@convergence/string-change-detector": "0.1.8",
     "del": "3.0.0",
     "fs": "0.0.1-security",
