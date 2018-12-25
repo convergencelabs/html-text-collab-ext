@@ -58,3 +58,9 @@ textEditor.deleteText(10, 5);
 textEditor.setText("New textarea value");
 ```
 
+## Development
+
+- Use `npm install` to install requried dependencies.
+- Use `npm run dist` to build the distribution package.
+- Use `npm start` to start the example application.
+
