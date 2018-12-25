@@ -116,7 +116,6 @@ export class CollaboratorSelection {
   }
 
   public setSelection(selection: ISelectionRange | null): void {
-
     if (selection === null) {
       this._cursor = null;
       this._selection = null;
@@ -131,9 +130,9 @@ export class CollaboratorSelection {
       } else {
         this._selection = {start: start, end: end};
       }
-
-      this.refresh();
     }
+
+    this.refresh();
   }
 
   public clearSelection(): void {
