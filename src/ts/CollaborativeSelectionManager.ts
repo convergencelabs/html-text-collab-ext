@@ -21,6 +21,15 @@ export class CollaborativeSelectionManager {
   constructor(options: ICollaborativeSelectionManagerOptions) {
     this._collaborators = new Map();
     this._textElement = options.control;
+
+    // TODO handle the line height better. The issue here
+    // is that the textarea-caret library can't handle
+    // a non-number.
+    const computed = window.getComputedStyle(this._textElement);
+    if (computed.lineHeight === "normal") {
+      throw new Error("Text areas must have a numeric line-height.");
+    }
+
     this._onSelection = options.onSelectionChanged;
 
     this._selectionAnchor = this._textElement.selectionStart;
