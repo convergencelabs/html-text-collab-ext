@@ -12,6 +12,8 @@ export interface ICollaborativeTextAreaOptions {
 export class CollaborativeTextEditor {
   private readonly _selectionManager: CollaborativeSelectionManager;
   private readonly _inputManager: TextInputManager;
+  private readonly _onInsert: (index: number, value: string) => void;
+  private readonly _onDelete: (index: number, length: number) => void;
 
   constructor(options: ICollaborativeTextAreaOptions) {
     if (!options) {
@@ -23,12 +25,23 @@ export class CollaborativeTextEditor {
     }
 
     const control = options.control;
-    const onInsert = options.onInsert !== undefined ?
-      options.onInsert : (index: number, value: string) => {
-      };
-    const onDelete = options.onDelete !== undefined ?
-      options.onDelete : (index: number, length: number) => {
-      };
+    const insertCallback = options.onInsert;
+    const deleteCallback = options.onDelete;
+
+    const onInsert = (index: number, value: string) => {
+      this._selectionManager.updateSelectionsOnInsert(index, value);
+      if (insertCallback) {
+        insertCallback(index, value);
+      }
+    }
+
+    const onDelete = (index: number, length: number) => {
+      this._selectionManager.updateSelectionsOnDelete(index, length);
+      if (deleteCallback) {
+        deleteCallback(index, length);
+      }
+    }
+
     const onSelectionChanged = options.onSelectionChanged !== undefined ?
       options.onSelectionChanged : (selection: ISelectionRange) => {
       };
@@ -39,10 +52,12 @@ export class CollaborativeTextEditor {
 
   public insertText(index: number, value: string): void {
     this._inputManager.insertText(index, value);
+    this._selectionManager.updateSelectionsOnInsert(index, value);
   }
 
   public deleteText(index: number, length: number): void {
     this._inputManager.deleteText(index, length);
+    this._selectionManager.updateSelectionsOnDelete(index, length);
   }
 
   public setText(value: string): void {
@@ -56,4 +71,5 @@ export class CollaborativeTextEditor {
   public selectionManager(): CollaborativeSelectionManager {
     return this._selectionManager;
   }
+
 }

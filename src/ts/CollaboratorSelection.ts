@@ -22,7 +22,7 @@ export class CollaboratorSelection {
   private readonly _container: HTMLDivElement;
 
   private _color: string;
-  private _selection: { start: number, end: number } | null;
+  private _selection: ISelectionRange| null;
   private _cursor: number | null;
   private _label: string;
   private readonly _margin: number;
@@ -121,18 +121,14 @@ export class CollaboratorSelection {
       this._selection = null;
     } else {
       this._cursor = selection.target;
-
-      const start = Number(selection.anchor);
-      const end = Number(selection.target);
-
-      if (start > end) {
-        this._selection = {start: end, end: start};
-      } else {
-        this._selection = {start: start, end: end};
-      }
+      this._selection = {...selection};
     }
 
     this.refresh();
+  }
+
+  public getSelection(): ISelectionRange {
+    return {...this._selection}
   }
 
   public clearSelection(): void {
@@ -181,7 +177,19 @@ export class CollaboratorSelection {
       this._rows.forEach(row => row.element.parentElement.removeChild(row.element));
       this._rows.splice(0, this._rows.length);
     } else {
-      const newRows = SelectionComputer.calculateSelection(this._textInput, this._selection.start, this._selection.end);
+
+      let start;
+      let end;
+
+      if (this._selection.anchor > this._selection.target) {
+        start = Number(this._selection.target);
+        end = Number(this._selection.anchor);
+      } else {
+        start = Number(this._selection.anchor);
+        end = Number(this._selection.target);
+      }
+
+      const newRows = SelectionComputer.calculateSelection(this._textInput, start, end);
 
       // Adjust size of rows as needed
       const delta = newRows.length - this._rows.length;

@@ -1,5 +1,6 @@
 import {ISelectionRange} from "./ISelectionRange";
 import {CollaboratorSelection} from "./CollaboratorSelection";
+import {IndexUtils} from "./IndexUtils";
 
 export type ISelectionCallback = (selection: ISelectionRange) => void;
 
@@ -101,6 +102,24 @@ export class CollaborativeSelectionManager {
 
   public dispose(): void {
     this._overlayContainer.parentElement.removeChild(this._overlayContainer);
+  }
+
+  public updateSelectionsOnInsert(index: number, value: string): void {
+    this._collaborators.forEach((collaborator) => {
+      const selection = collaborator.getSelection();
+      const anchor = IndexUtils.transformIndexOnInsert(selection.anchor, index, value);
+      const target = IndexUtils.transformIndexOnInsert(selection.target, index, value);
+      collaborator.setSelection({anchor, target});
+    });
+  }
+
+  public updateSelectionsOnDelete(index: number, length: number): void {
+    this._collaborators.forEach((collaborator) => {
+      const selection = collaborator.getSelection();
+      const anchor = IndexUtils.transformIndexOnDelete(selection.anchor, index, length);
+      const target = IndexUtils.transformIndexOnDelete(selection.target, index, length);
+      collaborator.setSelection({anchor, target});
+    });
   }
 
   private _checkSelection = () => {

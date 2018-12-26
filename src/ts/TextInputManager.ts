@@ -1,5 +1,6 @@
 // @ts-ignore
 import StringChangeDetector from "@convergence/string-change-detector";
+import {IndexUtils} from "./IndexUtils";
 
 export interface ITextInputManagerOptions {
   control: HTMLTextAreaElement;
@@ -45,8 +46,8 @@ export class TextInputManager {
   insertText(index: number, value: string): void {
     this._assertBound();
     const {start, end} = this._getSelection();
-    const xStart = TextInputManager._transformIndexOnInsert(start, index, value);
-    const xEnd = TextInputManager._transformIndexOnInsert(end, index, value);
+    const xStart = IndexUtils.transformIndexOnInsert(start, index, value);
+    const xEnd = IndexUtils.transformIndexOnInsert(end, index, value);
     this._changeDetector.insertText(index, value);
     this._updateControl();
     this._setTextSelection(xStart, xEnd);
@@ -55,8 +56,8 @@ export class TextInputManager {
   deleteText(index: number, length: number): void {
     this._assertBound();
     const {start, end} = this._getSelection();
-    const xStart = TextInputManager._transformIndexOnDelete(start, index, length);
-    const xEnd = TextInputManager._transformIndexOnDelete(end, index, length);
+    const xStart = IndexUtils.transformIndexOnDelete(start, index, length);
+    const xEnd = IndexUtils.transformIndexOnDelete(end, index, length);
     this._changeDetector.removeText(index, length);
     this._updateControl();
     this._setTextSelection(xStart, xEnd);
@@ -94,19 +95,5 @@ export class TextInputManager {
   private _setTextSelection(start: number, end: number): void {
     // this._control.focus();
     this._control.setSelectionRange(start, end);
-  }
-
-  private static _transformIndexOnInsert(index: number, insertIndex: number, value: string): number {
-      if (insertIndex <= index) {
-        return index + value.length;
-      }
-      return index;
-  }
-
-  private static _transformIndexOnDelete(index: number, deleteIndex: number, length: number): number {
-    if (index > deleteIndex) {
-      return index - Math.min(index - deleteIndex, length);
-    }
-    return index;
   }
 }

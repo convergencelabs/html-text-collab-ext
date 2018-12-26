@@ -17,8 +17,8 @@ const editor1 = new HtmlTextCollabExt.CollaborativeTextEditor({
     editor2.deleteText(index, length);
   },
   onSelectionChanged: (selection) => {
-    collaborator2.setSelection(selection);
-    collaborator2.flashCursorToolTip(2);
+    collaborator1.setSelection(selection);
+    collaborator1.flashCursorToolTip(2);
   }
 });
 
@@ -31,10 +31,10 @@ const editor2 = new HtmlTextCollabExt.CollaborativeTextEditor({
     editor1.deleteText(index, length);
   },
   onSelectionChanged: (selection) => {
-    collaborator1.setSelection(selection);
-    collaborator1.flashCursorToolTip(2);
+    collaborator2.setSelection(selection);
+    collaborator2.flashCursorToolTip(2);
   }
 });
 
-const collaborator1 = editor1.selectionManager().addCollaborator("user1", "User 1", "red");
-const collaborator2 = editor2.selectionManager().addCollaborator("user2", "User 2", "blue");
+const collaborator2 = editor1.selectionManager().addCollaborator("user2", "User 2", "blue");
+const collaborator1 = editor2.selectionManager().addCollaborator("user1", "User 1", "red");
