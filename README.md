@@ -3,6 +3,12 @@
 
 A set of utilities that enhances a normal HTML `<textarea>` element with collaborative editing capabilities. The enhanced `<textarea>` is able to render the cursor and selection of other collaborators. A tooltip with the collaborator's username can be flashed when remote edits are made. The utility also allows for non-disruptive modification of the `<textarea>` where the local user's selection and cursor are not impacted by changes to the `<textarea>`contents.
 
+#Demo
+The animation below shows the basic functionality provided by this library.
+
+![demo graphic](./assets/shared-cursors-and-selections.gif "Shared Cursors and Selections")
+
+
 ## Installation
 
 Install package with NPM and add it to your development dependencies:
