@@ -8,6 +8,8 @@ The animation below shows the basic functionality provided by this library.
 
 ![demo graphic](./assets/shared-cursors-and-selections.gif "Shared Cursors and Selections")
 
+You can see a live demo [here](https://examples.convergence.io/collaborative-textarea/) ([Convergence](https://convergence.io) does the real-time sync).  The code for it can be found [here](https://github.com/convergencelabs/javascript-examples/tree/master/src/collaborative-textarea).
+
 
 ## Installation
 
