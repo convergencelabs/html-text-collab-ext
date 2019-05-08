@@ -3,6 +3,8 @@
 
 A set of utilities that enhances a normal HTML `<textarea>` element with collaborative editing capabilities. The enhanced `<textarea>` is able to render the cursor and selection of other collaborators. A tooltip with the collaborator's username can be flashed when remote edits are made. The utility also allows for non-disruptive modification of the `<textarea>` where the local user's selection and cursor are not impacted by changes to the `<textarea>`contents.
 
+This library has no dependency on Convergence. You are free to use whichever data synchronization library or technique fancies you :D
+
 # Demo
 The animation below shows the basic functionality provided by this library.
 
