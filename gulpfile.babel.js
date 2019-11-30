@@ -90,7 +90,7 @@ const appendTsNamespace = () =>
     .pipe(dest("./"));
 
 const copyFiles = () =>
-  src(["README.md", "LICENSE.txt", "package.json"])
+  src(["README.md", "LICENSE", "package.json"])
     .pipe(dest("dist"));
 
 const dist = series(
