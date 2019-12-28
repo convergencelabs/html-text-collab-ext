@@ -10,12 +10,7 @@
 // @ts-ignore
 import StringChangeDetector from "@convergence/string-change-detector";
 import {IndexUtils} from "./IndexUtils";
-
-export interface ITextInputManagerOptions {
-  control: HTMLTextAreaElement;
-  onInsert: (index: number, value: string) => void;
-  onDelete: (index: number, length: number) => void;
-}
+import {ITextInputManagerOptions} from "./ITextInputManagerOptions";
 
 export class TextInputManager {
 
@@ -102,7 +97,6 @@ export class TextInputManager {
   }
 
   private _setTextSelection(start: number, end: number): void {
-    // this._control.focus();
     this._control.setSelectionRange(start, end);
   }
 }

@@ -13,16 +13,17 @@ import {SelectionComputer} from "./SelectionComputer";
 
 // @ts-ignore
 import getCaretCoordinates from "textarea-caret";
+import {ICollaboratorSelectionOptions} from "./ICollaboratorSelectionOptions";
 
 interface ISelectionData {
   element: HTMLDivElement;
   rowData: ISelectionRow;
 }
 
-export interface ICollaboratorSelectionOptions {
-  margin?: number;
-}
-
+/**
+ * This class represents a specific collaborators selection and controls
+ * the rendering of the remote cursor / selection.
+ */
 export class CollaboratorSelection {
   private readonly _rows: ISelectionData[];
   private readonly _cursorElement: HTMLDivElement;

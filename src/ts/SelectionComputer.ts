@@ -8,13 +8,13 @@
  */
 
 import {ISelectionRow} from "./ISelectionRow";
-import {ICaretCoordinates} from "./ICaretCoordinates";
+import {ICursorCoordinates} from "./ICursorCoordinates";
 
 // @ts-ignore
 import getCaretCoordinates from "textarea-caret";
 
 
-/*
+/**
  * Computes the dimensions of the text selection.  Each line in the textarea has its own
  * selection dimensions, which are intended to be used to render a div with the specified
  * position, dimensions and background color.
@@ -34,8 +34,8 @@ export class SelectionComputer {
   // The calculated styles for each row.
   private readonly selectionRows: ISelectionRow[];
 
-  private readonly startCoordinates: ICaretCoordinates;
-  private readonly endCoordinates: ICaretCoordinates;
+  private readonly startCoordinates: ICursorCoordinates;
+  private readonly endCoordinates: ICursorCoordinates;
   private readonly lineHeight: number;
   private readonly elementPaddingLeft: number;
   private readonly elementPaddingRight: number;
@@ -66,11 +66,11 @@ export class SelectionComputer {
     }
   }
 
-  private appendSingleLineSelection(startCoordinates: ICaretCoordinates, endCoordinates: ICaretCoordinates) {
+  private appendSingleLineSelection(startCoordinates: ICursorCoordinates, endCoordinates: ICursorCoordinates) {
     this.selectionRows.push(...this.buildSingleLineSelection(startCoordinates, endCoordinates));
   }
 
-  private buildSingleLineSelection(startCoordinates: ICaretCoordinates, endCoordinates: ICaretCoordinates): ISelectionRow[] {
+  private buildSingleLineSelection(startCoordinates: ICursorCoordinates, endCoordinates: ICursorCoordinates): ISelectionRow[] {
     // does this line wrap? If not, we can just calculate the row selection based on
     // the provided coordinates.
     if (startCoordinates.top === endCoordinates.top) {
@@ -92,7 +92,7 @@ export class SelectionComputer {
    * @param startCoordinates
    * @param endCoordinates
    */
-  private buildWrappedLineSelections(startCoordinates: ICaretCoordinates, endCoordinates: ICaretCoordinates): ISelectionRow[] {
+  private buildWrappedLineSelections(startCoordinates: ICursorCoordinates, endCoordinates: ICursorCoordinates): ISelectionRow[] {
     const rows: ISelectionRow[] = [];
     // the first line just goes the full width of the textarea
     rows.push({

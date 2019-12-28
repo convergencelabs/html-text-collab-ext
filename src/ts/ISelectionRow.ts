@@ -7,6 +7,9 @@
  * file. If it was not, please see <https://opensource.org/licenses/MIT>
  */
 
+/**
+ * Represents a highlighted selection row's rendering information
+ */
 export interface ISelectionRow {
   top: number;
   left: number;
