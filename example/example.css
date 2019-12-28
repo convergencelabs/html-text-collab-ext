@@ -42,7 +42,6 @@ div.content div.col:first-child {
 
 textarea {
   height: 300px;
-  flex: 1;
   line-height: 1.2;
   resize: none;
 }
