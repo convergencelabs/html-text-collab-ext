@@ -35,7 +35,7 @@ Install package with NPM and add it to your development dependencies:
 ### JavaScript
 ```javascript
 const textarea = document.getElementById("example");
-const textEditor = new HtmlTextCollabExt.CollaborativeTextEditor({
+const textEditor = new HtmlTextCollabExt.CollaborativeTextArea({
   control: textarea,
   onInsert: (index, value) => console.log(`"${value}" was inserted at index ${index}`,
   onDelete: (index, length) => console.log(`"${length}" characters were deleted at index ${index}`,

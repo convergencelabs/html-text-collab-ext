@@ -8,7 +8,7 @@ textarea2.value = TEXT_DATA;
 textarea2.selectionStart = 0;
 textarea2.selectionEnd = 0;
 
-const editor1 = new HtmlTextCollabExt.CollaborativeTextEditor({
+const editor1 = new HtmlTextCollabExt.CollaborativeTextArea({
   control: textarea1,
   onInsert: (index, value) => {
     editor2.insertText(index, value);
@@ -22,7 +22,7 @@ const editor1 = new HtmlTextCollabExt.CollaborativeTextEditor({
   }
 });
 
-const editor2 = new HtmlTextCollabExt.CollaborativeTextEditor({
+const editor2 = new HtmlTextCollabExt.CollaborativeTextArea({
   control: textarea2,
   onInsert: (index, value) => {
     editor1.insertText(index, value);
