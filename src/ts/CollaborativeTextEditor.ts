@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Convergence Labs, Inc.
  *
- * This file is part of the CodeMirror Collaborative Extensions, which is
+ * This file is part of the HTML Text Collaborative Extensions, which is
  * released under the terms of the MIT license. A copy of the MIT license
  * is usually provided as part of this source code package in the LICENCE
  * file. If it was not, please see <https://opensource.org/licenses/MIT>
@@ -21,8 +21,6 @@ export interface ICollaborativeTextAreaOptions {
 export class CollaborativeTextEditor {
   private readonly _selectionManager: CollaborativeSelectionManager;
   private readonly _inputManager: TextInputManager;
-  private readonly _onInsert: (index: number, value: string) => void;
-  private readonly _onDelete: (index: number, length: number) => void;
 
   constructor(options: ICollaborativeTextAreaOptions) {
     if (!options) {
@@ -42,17 +40,18 @@ export class CollaborativeTextEditor {
       if (insertCallback) {
         insertCallback(index, value);
       }
-    }
+    };
 
     const onDelete = (index: number, length: number) => {
       this._selectionManager.updateSelectionsOnDelete(index, length);
       if (deleteCallback) {
         deleteCallback(index, length);
       }
-    }
+    };
 
     const onSelectionChanged = options.onSelectionChanged !== undefined ?
-      options.onSelectionChanged : (selection: ISelectionRange) => {
+      options.onSelectionChanged : (_: ISelectionRange) => {
+        // No-op
       };
 
     this._inputManager = new TextInputManager({control, onInsert, onDelete});
@@ -80,5 +79,4 @@ export class CollaborativeTextEditor {
   public selectionManager(): CollaborativeSelectionManager {
     return this._selectionManager;
   }
-
 }
