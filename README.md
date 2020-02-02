@@ -19,6 +19,21 @@ Install package with NPM and add it to your development dependencies:
 
 ```npm install --save-dev @convergence/html-text-collab-ext```
 
+## Textarea Line Height
+For this utiity to work properly, your text area must have a valid numeric line height.  Most user agents default to a value of 1.2, but this must be set explicitly.  For example:
+
+```css
+textarea {
+  line-height: 1.2;
+}
+```
+
+Failure to do so may result in the following error:
+
+```
+Text areas must have a numeric line-height.
+```
+
 ## Example Usage
 
 ### HTML
