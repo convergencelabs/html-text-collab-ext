@@ -64,7 +64,7 @@
     "gulp-typescript": "5.0.0",
     "gulp-uglify": "3.0.2",
     "import": "0.0.6",
-    "jquery": "3.4.0",
+    "jquery": "3.5.0",
     "lite-server": "2.4.0",
     "rollup": "2.10.0",
     "rollup-plugin-commonjs": "10.1.0",
