@@ -36,7 +36,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@convergence/convergence": "~1.0.0-rc.5",
     "@convergence/string-change-detector": "0.1.8",
     "textarea-caret": "convergencelabs/textarea-caret-position"
   },
@@ -52,7 +51,6 @@
     "@babel/preset-typescript": "7.9.0",
     "@babel/register": "7.9.0",
     "del": "3.0.0",
-    "fs": "0.0.1-security",
     "gulp": "4.0.2",
     "gulp-babel": "8.0.0",
     "gulp-clean-css": "4.3.0",
@@ -68,13 +66,11 @@
     "lite-server": "2.4.0",
     "rollup": "2.10.0",
     "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-license": "^2.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-typescript2": "0.27.1",
-    "rollup-stream": "1.24.1",
     "trim": "0.0.1",
     "tslib": "^2.0.0",
-    "typescript": "3.9.2",
-    "vinyl-buffer": "1.0.1",
-    "vinyl-source-stream": "2.0.0"
+    "typescript": "3.9.2"
   }
 }

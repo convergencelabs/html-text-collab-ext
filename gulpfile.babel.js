@@ -1,7 +1,5 @@
 import {series, src, dest} from "gulp";
 import insert from "gulp-insert";
-import rollupStream from "rollup-stream";
-import rollupConfig from "./rollup.config.js";
 import sourceMaps from "gulp-sourcemaps";
 import uglify from "gulp-uglify";
 import filter from "gulp-filter-each";
@@ -9,25 +7,45 @@ import cleanCSS from "gulp-clean-css";
 import babel from "gulp-babel";
 import rename from "gulp-rename";
 import del from "del";
-import header from "gulp-header";
-import source from "vinyl-source-stream";
-import buffer from "vinyl-buffer";
-import fs from "fs";
 import trim from "trim";
 import gulpTypescript from "gulp-typescript";
 import typescript from "typescript";
 
-const umd = () => {
-  const packageJson = JSON.parse(fs.readFileSync("./package.json"));
-  const headerTxt = fs.readFileSync("./copyright-header.txt");
+import rollupTypescript from 'rollup-plugin-typescript2'
+import resolve from 'rollup-plugin-node-resolve';
+import commonJS from 'rollup-plugin-commonjs'
+import pkg from "./package";
+import {rollup} from "rollup";
+import license from "rollup-plugin-license";
 
-  return rollupStream({...rollupConfig, rollup: require('rollup')})
-    .pipe(source('dist/umd/html-text-collab-ext.js'))
-    .pipe(header(headerTxt, {package: packageJson}))
-    .pipe(buffer())
-    .pipe(sourceMaps.init({loadMaps: true}))
-    .pipe(sourceMaps.write("."))
-    .pipe(dest("./"));
+const umd = () => {
+  return rollup({
+    input: 'src/ts/index.ts',
+    plugins: [
+      resolve(),
+      commonJS({
+        include: 'node_modules/**'
+      }),
+      rollupTypescript({
+        typescript: require('typescript'),
+      }),
+      license({
+        banner: {
+          commentStyle: 'regular', // The default
+          content: {
+            file: './copyright-header.txt',
+          },
+        },
+      })
+    ]
+  }).then(bundle => {
+    return bundle.write({
+      file: "dist/umd/html-text-collab-ext.js",
+      format: 'umd',
+      name: "HtmlTextCollabExt",
+      sourcemap: true
+    });
+  });
 };
 
 const minifyUmd = () =>

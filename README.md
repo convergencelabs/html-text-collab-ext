@@ -85,7 +85,7 @@ textEditor.setText("New textarea value");
 
 ## Development
 
-- Use `npm install` to install requried dependencies.
+- Use `npm install` to install required dependencies.
 - Use `npm run dist` to build the distribution package.
 - Use `npm start` to start the example application.
 
