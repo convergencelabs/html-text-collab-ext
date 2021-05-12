@@ -69,7 +69,7 @@
     "rollup-plugin-license": "^2.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-typescript2": "0.27.1",
-    "trim": "0.0.1",
+    "trim": "0.0.3",
     "tslib": "^2.0.0",
     "typescript": "3.9.2"
   }
