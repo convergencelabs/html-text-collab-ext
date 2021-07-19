@@ -47,8 +47,8 @@
     "example"
   ],
   "dependencies": {
-    "@convergence/string-change-detector": "0.1.8",
-    "textarea-caret": "convergencelabs/textarea-caret-position"
+    "@convergence/string-change-detector": "^0.1.8",
+    "textarea-caret": "https://github.com/convergencelabs/textarea-caret-position.git"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.1",
