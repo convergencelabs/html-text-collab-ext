@@ -1,9 +1,9 @@
-const textarea1 = $("#textarea1")[0];
+const textarea1 = document.getElementById("textarea1");
 textarea1.value = TEXT_DATA;
 textarea1.selectionStart = 0;
 textarea1.selectionEnd = 0;
 
-const textarea2 = $("#textarea2")[0];
+const textarea2 = document.getElementById("textarea2");
 textarea2.value = TEXT_DATA;
 textarea2.selectionStart = 0;
 textarea2.selectionEnd = 0;

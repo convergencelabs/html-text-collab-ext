@@ -141,7 +141,6 @@ export class SelectionComputer {
         endOfLinePosition = this.end;
       }
       const endOfLineCoordinates = getCaretCoordinates(this.element, endOfLinePosition);
-      // console.log('target of line position', endOfLinePosition, 'coords', endOfLineCoordinates);
 
       // This "single line" may actually wrap multiple lines of the textarea
       this.appendSingleLineSelection(currentCoordinates, endOfLineCoordinates);

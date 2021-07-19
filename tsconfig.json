@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
-    "declaration": false,
-    "module": "es6",
-    "noImplicitAny": true,
     "target": "es5",
-    "lib": ["es5", "es6", "dom"]
+    "module": "ES2020",
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "inlineSources": true,
+    "baseUrl": "./src/ts",
+    "lib": ["dom", "es6", "es7"]
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "build",
+    "dist",
+    "example"
+  ]
 }
