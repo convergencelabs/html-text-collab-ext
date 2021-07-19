@@ -1,5 +1,6 @@
 ## HTML Text Collaborative Extensions
-[![Build Status](https://travis-ci.org/convergencelabs/html-text-collab-ext.svg?branch=master)](https://travis-ci.org/convergencelabs/html-text-collab-ext)
+[![Build](https://github.com/convergencelabs/html-text-collab-ext/actions/workflows/build.yml/badge.svg)
+](https://github.com/convergencelabs/html-text-collab-ext/actions/workflows/build.yml)
 
 A set of utilities that enhances a normal HTML `<textarea>` element with collaborative editing capabilities. The enhanced `<textarea>` is able to render the cursor and selection of other collaborators. A tooltip with the collaborator's username can be flashed when remote edits are made. The utility also allows for non-disruptive modification of the `<textarea>` where the local user's selection and cursor are not impacted by changes to the `<textarea>`contents.
 
